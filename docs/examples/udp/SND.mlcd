@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ModelLink name="SND" xmlns="http://www.airbus.com/si2/icd" modelInterface="SND.micd#//@modelInterface" globalSimulationDataDescription="Data.gsdd#data">
+    <Sends channel="UdpChannel">
+        <PortLink port="message1_Port">
+            <Link signal="message1"/>
+        </PortLink>
+        <PortLink port="message2_Port">
+            <Link signal="message2"/>
+        </PortLink>
+    </Sends>
+</ModelLink>

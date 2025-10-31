@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ModelInterface name="SND" xmlns="http://www.airbus.com/si2/icd">
+    <Imports>
+        <Protocol href="line2.analog#//@analogProtocol"/>
+        <Protocol href="line3.analog#//@analogProtocol"/>
+    </Imports>
+    <Outputs>
+        <FloatingPointElement name="out_line1" type="FLOAT32"/>
+    </Outputs>
+    <OutputPorts>
+        <QueuingPort depth="4" name="out_line2_port" size="4" protocol="Line2_prot"/>
+        <QueuingPort depth="4" name="out_line3_port" size="4" protocol="Line3_prot"/>
+    </OutputPorts>
+</ModelInterface>

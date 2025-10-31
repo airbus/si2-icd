@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AnalogProtocol xmlns="http://www.airbus.com/si2/analog" xmlns:icd="http://www.airbus.com/si2/icd" name="Line2_prot">
+    <AnalogSignal name="line2">
+        <icd:FloatingPointElement name="value" type="FLOAT32"/>
+    </AnalogSignal>
+</AnalogProtocol>

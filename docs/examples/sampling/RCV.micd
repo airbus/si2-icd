@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ModelInterface name="RCV" xmlns="http://www.airbus.com/si2/icd">
+    <Imports>
+        <DataDefinition href="data.dd#//@dataDefinition"/>
+    </Imports>
+    <Inputs>
+        <StringElement dimensions="12" name="in_str"/>
+        <IntegerElement name="in_i8" type="INT8"/>
+        <IntegerElement name="in_ui8" type="UINT8"/>
+        <IntegerElement name="in_i16" type="INT16"/>
+        <IntegerElement name="in_ui16" type="UINT16"/>
+        <IntegerElement name="in_i32" type="INT32"/>
+        <IntegerElement name="in_ui32" type="UINT32"/>
+        <IntegerElement name="in_i64" type="INT64"/>
+        <IntegerElement name="in_ui64" type="UINT64"/>
+        <BooleanElement name="in_b"/>
+        <IntegerArrayElement dimensions="3" name="in_ui64_array" type="UINT64"/>
+        <ReferenceElement name="in_enum" reference="test_enum"/>
+        <FloatingPointElement name="in_f32" type="FLOAT32"/>
+        <FloatingPointElement name="in_f64" type="FLOAT64"/>
+        <ReferenceElement name="in_struct" reference="test_struct"/>
+        <ReferenceArrayElement dimensions="3" name="in_struct_array" reference="test_struct"/>
+    </Inputs>
+</ModelInterface>

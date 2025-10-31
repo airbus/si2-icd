@@ -1,0 +1,1048 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:icd="http://www.airbus.com/si2/icd"
+	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.airbus.com/si2/icd" elementFormDefault="qualified"
+	attributeFormDefault="unqualified" ecore:ignoreSubstitutionGroups="true" version="1.15.0">
+
+	<!-- Base Elements -->
+	<xsd:element abstract="true" name="LabeledElement" type="icd:LabeledElement" />
+	<xsd:element abstract="true" name="BaseElement" type="icd:BaseElement" />
+	<xsd:element name="VersionRange" type="icd:VersionRange" />
+	<xsd:element name="Version" type="icd:Version" />
+
+	<xsd:element abstract="true" name="Property" type="icd:Property" />
+	<xsd:element name="BooleanProperty" substitutionGroup="icd:Property"
+		type="icd:BooleanProperty" />
+	<xsd:element name="FloatingPointProperty" substitutionGroup="icd:Property"
+		type="icd:FloatingPointProperty" />
+	<xsd:element name="StringProperty" substitutionGroup="icd:Property"
+		type="icd:StringProperty" />
+	<xsd:element name="DateProperty" substitutionGroup="icd:Property"
+		type="icd:DateProperty" />
+
+	<!-- Data Elements -->
+	<xsd:element abstract="true" name="ElementType" type="icd:ElementType" />
+	<xsd:element name="StructureArrayElement" substitutionGroup="icd:ElementType"
+		type="icd:StructureArrayType" />
+	<xsd:element name="StructureElement" substitutionGroup="icd:ElementType"
+		type="icd:StructureType" />
+	<xsd:element name="ReferenceArrayElement" substitutionGroup="icd:ElementType"
+		type="icd:ReferenceArrayType" />
+	<xsd:element name="ReferenceElement" substitutionGroup="icd:ElementType"
+		type="icd:ReferenceType" />
+	<xsd:element name="BooleanElement" substitutionGroup="icd:ElementType"
+		type="icd:BooleanType" />
+	<xsd:element name="FloatingPointElement" substitutionGroup="icd:ElementType"
+		type="icd:FloatingPointType" />
+	<xsd:element name="EnumeratedElement" substitutionGroup="icd:ElementType"
+		type="icd:EnumeratedType" />
+	<xsd:element name="IntegerElement" substitutionGroup="icd:ElementType"
+		type="icd:IntegerType" />
+	<xsd:element name="StringElement" substitutionGroup="icd:ElementType"
+		type="icd:StringType" />
+	<xsd:element name="ByteArrayElement" substitutionGroup="icd:ElementType" type="icd:ByteArrayType" />
+	<xsd:element name="FloatingPointArrayElement" substitutionGroup="icd:ElementType"
+		type="icd:FloatingPointArrayType" />
+	<xsd:element name="IntegerArrayElement" substitutionGroup="icd:ElementType"
+		type="icd:IntegerArrayType" />
+	<xsd:element name="StringArrayElement" substitutionGroup="icd:ElementType"
+		type="icd:StringArrayType" />
+	<xsd:element name="BooleanArrayElement" substitutionGroup="icd:ElementType"
+		type="icd:BooleanArrayType" />
+	<xsd:element name="EnumeratedArrayElement" substitutionGroup="icd:ElementType"
+		type="icd:EnumeratedArrayType" />
+	<xsd:element name="MessageElement" substitutionGroup="icd:ElementType"
+		type="icd:MessageElement" />
+
+	<!-- ICD Elements -->
+	<xsd:element name="GlobalSimulationDataDescription"
+		type="icd:GlobalSimulationDataDescription" />
+	<xsd:element name="ModelInterface" type="icd:ModelInterface" />
+	<xsd:element name="ModelSpecification" type="icd:ModelSpecification" />
+	<xsd:element name="ModelLink" type="icd:ModelLink" />
+	<xsd:element name="DataDefinition" type="icd:DataDefinition" />
+	<xsd:element name="Protocol" type="icd:Protocol" />
+	<xsd:element name="GenericProtocol" type="icd:GenericProtocol" />
+	<xsd:element name="Channel" type="icd:Channel" />
+	<xsd:element name="Port" abstract="true" type="icd:Port" />
+	<xsd:element name="QueuingPort" substitutionGroup="icd:Port" type="icd:QueuingPort" />
+	<xsd:element name="SamplingPort" substitutionGroup="icd:Port" type="icd:SamplingPort" />
+
+	<!-- Base Types -->
+	<xsd:complexType abstract="true" name="LabeledElement">
+		<xsd:attribute name="name" type="icd:IdString" use="required" />
+		<xsd:attribute name="description" type="xsd:string" />
+	</xsd:complexType>
+
+	<xsd:complexType name="Properties">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="icd:Property" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType abstract="true" name="BaseElement">
+		<xsd:complexContent>
+			<xsd:extension base="icd:LabeledElement">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="Properties" type="icd:Properties" />
+				</xsd:sequence>
+				<xsd:attribute use="optional" name="metaInformation" type="icd:MetainformationTag"/>
+				<xsd:attribute use="optional" name="checkSumType" default="CRC32" type="icd:CheckSumType"/>
+				<xsd:attribute use="optional" name="fieldStart" type="icd:IdString"/>
+				<xsd:attribute use="optional" name="fieldStop" type="icd:IdString"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType abstract="true" name="Property">
+		<xsd:complexContent>
+			<xsd:extension base="icd:LabeledElement" />
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="BooleanProperty">
+		<xsd:complexContent>
+			<xsd:extension base="icd:Property">
+				<xsd:attribute name="value" type="xsd:boolean" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="FloatingPointProperty">
+		<xsd:complexContent>
+			<xsd:extension base="icd:Property">
+				<xsd:attribute name="value" type="xsd:double" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="StringProperty">
+		<xsd:complexContent>
+			<xsd:extension base="icd:Property">
+				<xsd:attribute name="value" type="xsd:string" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="DateProperty">
+		<xsd:complexContent>
+			<xsd:extension base="icd:Property">
+				<xsd:attribute name="value" type="xsd:dateTime" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:simpleType ecore:instanceClass="org.osgi.framework.Version" name="Version">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[0-9]+\.[0-9]+\.[0-9]+[\.A-Za-z_0-9\-]*" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="IdString">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[A-Za-z_0-9@\-\.\[\]#]*" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="VersionRange">
+		<xsd:attribute name="minimumVersion" type="icd:Version" />
+		<xsd:attribute name="maximumVersion" type="icd:Version" />
+		<xsd:attribute default="true" name="minimumInclusive" type="xsd:boolean" />
+		<xsd:attribute default="false" name="maximumInclusive" type="xsd:boolean" />
+	</xsd:complexType>
+	
+	<!-- Security -->
+	<xsd:complexType name="Security">
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0"
+				name="Classification" type="icd:SecurityClassification" />
+			<xsd:element maxOccurs="1" minOccurs="0"
+				name="USExportControl" type="icd:SecurityUSExportControl" />
+			<xsd:element maxOccurs="1" minOccurs="0"
+				name="NationalExportControl"
+				type="icd:SecurityNationalExportControl" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="SecurityClassification">
+		<xsd:simpleContent>
+			<xsd:extension base="icd:SecurityClassificationLevel">
+				<xsd:attribute name="entity" type="icd:SecurityClassificationEntity" />
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	<xsd:simpleType name="SecurityClassificationLevel">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="TBD"/>
+			<xsd:enumeration value="Unclassified"/>
+			<xsd:enumeration value="Sensitive"/>
+			<xsd:enumeration value="Restricted"/>
+			<xsd:enumeration value="Confidential"/>
+			<xsd:enumeration value="Secret"/>
+			<xsd:enumeration value="TopSecret"/>
+		</xsd:restriction>                  
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="SecurityClassificationEntity">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="NATO" />
+			<xsd:enumeration value="OCCAR" />
+			<xsd:enumeration value="Germany" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="SecurityUSExportControl">
+		<xsd:list>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="TBD" />
+					<xsd:enumeration value="None" />
+					<xsd:enumeration value="ITAR" />
+					<xsd:enumeration value="EAR" />
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:list>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="SecurityNationalExportControl">
+		<xsd:list>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="TBD" />
+					<xsd:enumeration value="None" />
+					<xsd:enumeration value="EUDual" />
+					<xsd:enumeration value="Germany" />
+					<xsd:enumeration value="France" />
+					<xsd:enumeration value="Spain" />
+					<xsd:enumeration value="UK" />
+					<xsd:enumeration value="Italy" />
+					<xsd:enumeration value="Other" />
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:list>
+	</xsd:simpleType>
+
+	<!-- Encoding -->
+	<xsd:complexType name="Encoding">
+		<xsd:attribute name="encodingType" type="icd:EncodingType" use="required" />
+	</xsd:complexType>
+
+	<xsd:simpleType name="EncodingType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="BNR" />
+			<xsd:enumeration value="BIN" />
+			<xsd:enumeration value="BCD" />
+			<xsd:enumeration value="OCT" />
+			<xsd:enumeration value="IEEE754" />
+			<xsd:enumeration value="SBIN" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="LinearScaling">
+		<xsd:attribute name="scalingOffset" type="xsd:double" use="required" />
+		<xsd:attribute name="scalingFactor" type="xsd:double" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="BitLayout">
+		<xsd:attribute name="startBit" type="xsd:nonNegativeInteger" />
+		<xsd:attribute name="startWord" type="xsd:nonNegativeInteger" />
+		<xsd:attribute name="bitLength" type="xsd:nonNegativeInteger" use="required" />
+		<xsd:attribute name="postBitLength" type="xsd:nonNegativeInteger" />
+		<xsd:attribute name="type" type="icd:BitLayoutType" default="FIXED" />
+	</xsd:complexType>
+	
+	<xsd:complexType name="ItemPadding">
+		<xsd:attribute name="preBitLength" type="xsd:nonNegativeInteger" />
+		<xsd:attribute name="postBitLength" type="xsd:nonNegativeInteger" />
+	</xsd:complexType>
+
+	<xsd:simpleType name="ByteOrder">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="LE" />
+			<xsd:enumeration value="BE" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="BitOrder">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="MSB0" />
+			<xsd:enumeration value="LSB0" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="Ordering">
+		<xsd:attribute name="byteOrder" type="icd:ByteOrder" use="optional" />
+		<xsd:attribute name="bitOrder" type="icd:BitOrder" use="optional" />
+	</xsd:complexType>
+	
+	<xsd:complexType name="Condition">
+		<xsd:attribute name="element" type="icd:ReferenceId" use="required" />
+		<xsd:attribute name="type" type="icd:ConditionType" default="INCLUDE" />
+	</xsd:complexType>
+
+	<!-- Data Types -->
+	<xsd:complexType abstract="true" name="ElementType">
+		<xsd:complexContent>
+			<xsd:extension base="icd:BaseElement">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="Encoding" type="icd:Encoding" />
+					<xsd:element minOccurs="0" name="BitLayout" type="icd:BitLayout" />
+					<xsd:element minOccurs="0" name="LinearScaling" type="icd:LinearScaling" />
+					<xsd:element minOccurs="0" name="Ordering" type="icd:Ordering" />
+					<xsd:element minOccurs="0" name="Condition" type="icd:Condition" />
+				</xsd:sequence>
+				<xsd:attribute name="semantic" type="xsd:string" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="BooleanType">
+		<xsd:complexContent>
+			<xsd:extension base="icd:ElementType">
+				<xsd:sequence>
+					<xsd:element maxOccurs="2" minOccurs="0" name="Meaning" type="icd:BooleanMeaning" />
+				</xsd:sequence>
+				<xsd:attribute name="value" type="xsd:boolean" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="BooleanMeaning">
+		<xsd:complexContent>
+			<xsd:extension base="icd:LabeledElement">
+				<xsd:attribute name="value" type="xsd:boolean" default="false" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="FloatingPointType">
+		<xsd:complexContent>
+			<xsd:extension base="icd:ElementType">
+				<xsd:attribute name="type" type="icd:FloatingPointPrecisionType" default="FLOAT64" />
+				<xsd:attribute name="displayUnit" type="xsd:string" />
+				<xsd:attribute name="value" type="xsd:double" />
+				<xsd:attribute name="maximum" type="xsd:double" />
+				<xsd:attribute name="minimum" type="xsd:double" />
+				<xsd:attribute name="rangeBoundaries" type="icd:RangeBoundaries" use="optional" default="MINIMUM_MAXIMUM_INCLUSIVE" />				<xsd:attribute name="unit" type="xsd:string" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="EnumeratedType">
+		<xsd:complexContent>
+			<xsd:extension base="icd:ElementType">
+				<xsd:sequence>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="Entry"
+						type="icd:EnumeratedEntry" />
+				</xsd:sequence>
+				<xsd:attribute name="value" type="xsd:int" />
+				<xsd:attribute name="type" type="icd:EnumPrecisionType" default="INT32" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="EnumeratedEntry">
+		<xsd:complexContent>
+			<xsd:extension base="icd:LabeledElement">
+				<xsd:attribute name="value" type="xsd:int" use="required" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="IntegerType">
+		<xsd:complexContent>
+			<xsd:extension base="icd:ElementType">
+				<xsd:attribute name="type" type="icd:IntegerPrecisionType" default="INT32" />
+				<xsd:attribute name="value" type="xsd:int" />
+				<xsd:attribute name="maximum" type="xsd:int" />
+				<xsd:attribute name="minimum" type="xsd:int" />
+				<xsd:attribute name="rangeBoundaries" type="icd:RangeBoundaries" use="optional" default="MINIMUM_MAXIMUM_INCLUSIVE" />
+				<xsd:attribute name="unit" type="xsd:string" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="StringType">
+		<xsd:complexContent>
+			<xsd:extension base="icd:ArrayType">
+				<xsd:attribute name="value" type="xsd:string" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType abstract="true" name="ArrayType">
+		<xsd:complexContent>
+			<xsd:extension base="icd:ElementType">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="ItemPadding" type="icd:ItemPadding" />
+					<xsd:element minOccurs="0" name="DynamicArrayCounter" type="icd:DynamicArrayCounter" />
+				</xsd:sequence>
+				<xsd:attribute name="dimensions" type="icd:IntegerArray" use="required" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ByteArrayType">
+		<xsd:complexContent>
+			<xsd:extension base="icd:ArrayType">
+				<xsd:sequence>
+					<xsd:element maxOccurs="2" minOccurs="0" name="Meaning" type="icd:BooleanMeaning" />
+				</xsd:sequence>
+				<xsd:attribute name="value" type="xsd:base64Binary" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="DynamicArrayCounter">
+		<xsd:attribute name="element" type="icd:ReferenceId" />
+		<xsd:attribute name="terminationValue" type="xsd:string" />
+		<xsd:attribute name="offset" type="xsd:nonNegativeInteger" />
+		<xsd:attribute name="type" type="icd:DynamicArrayType" default="CARDINAL" />
+	</xsd:complexType>
+
+	<xsd:complexType name="FloatingPointArrayType">
+		<xsd:complexContent>
+			<xsd:extension base="icd:ArrayType">
+				<xsd:attribute name="value" type="icd:FloatingPointArray" />
+				<xsd:attribute name="maximum" type="xsd:double" />
+				<xsd:attribute name="minimum" type="xsd:double" />
+				<xsd:attribute name="rangeBoundaries" type="icd:RangeBoundaries" use="optional" default="MINIMUM_MAXIMUM_INCLUSIVE" />
+				<xsd:attribute name="unit" type="xsd:string" />
+				<xsd:attribute name="displayUnit" type="xsd:string" />
+				<xsd:attribute name="type" type="icd:FloatingPointPrecisionType" default="FLOAT64" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="IntegerArrayType">
+		<xsd:complexContent>
+			<xsd:extension base="icd:ArrayType">
+				<xsd:attribute name="value" type="icd:IntegerArray" />
+				<xsd:attribute name="maximum" type="xsd:int" />
+				<xsd:attribute name="minimum" type="xsd:int" />
+				<xsd:attribute name="rangeBoundaries" type="icd:RangeBoundaries" use="optional" default="MINIMUM_MAXIMUM_INCLUSIVE" />				<xsd:attribute name="unit" type="xsd:string" />
+				<xsd:attribute name="displayUnit" type="xsd:string" />
+				<xsd:attribute name="type" type="icd:IntegerPrecisionType" default="INT32" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="BooleanArrayType">
+		<xsd:complexContent>
+			<xsd:extension base="icd:ArrayType">
+				<xsd:attribute name="value" type="icd:BooleanArray" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="EnumeratedArrayType">
+		<xsd:complexContent>
+			<xsd:extension base="icd:ArrayType">
+				<xsd:sequence>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="Entry"
+						type="icd:EnumeratedEntry" />
+				</xsd:sequence>
+				<xsd:attribute name="value" type="icd:IntegerArray" />
+				<xsd:attribute name="type" type="icd:EnumPrecisionType" default="INT32" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="StringArrayType">
+		<xsd:complexContent>
+			<xsd:extension base="icd:ArrayType">
+				<xsd:attribute name="value" type="icd:StringArray" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="StructureArrayType">
+		<xsd:complexContent>
+			<xsd:extension base="icd:ArrayType">
+				<xsd:sequence>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" ref="icd:ElementType" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="StructureType">
+		<xsd:complexContent>
+			<xsd:extension base="icd:ElementType">
+				<xsd:sequence>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" ref="icd:ElementType" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ReferenceType">
+		<xsd:complexContent>
+			<xsd:extension base="icd:ElementType">
+				<xsd:attribute use="required" name="reference" type="icd:ReferenceId" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ReferenceArrayType">
+		<xsd:complexContent>
+			<xsd:extension base="icd:ArrayType">
+				<xsd:attribute use="required" name="reference" type="icd:ReferenceId" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<!-- Unit Types -->
+	<xsd:complexType name="BaseUnit">
+		<xsd:complexContent>
+			<xsd:extension base="icd:LabeledElement">
+				<xsd:attribute default="0" name="A" type="xsd:int" />
+				<xsd:attribute default="0" name="cd" type="xsd:int" />
+				<xsd:attribute default="1" name="factor" type="xsd:double" />
+				<xsd:attribute default="0" name="K" type="xsd:int" />
+				<xsd:attribute default="0" name="kg" type="xsd:int" />
+				<xsd:attribute default="0" name="m" type="xsd:int" />
+				<xsd:attribute default="0" name="mol" type="xsd:int" />
+				<xsd:attribute default="0" name="offset" type="xsd:double" />
+				<xsd:attribute default="0" name="rad" type="xsd:int" />
+				<xsd:attribute default="0" name="s" type="xsd:int" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="DisplayUnit">
+		<xsd:complexContent>
+			<xsd:extension base="icd:LabeledElement">
+				<xsd:attribute default="1" name="factor" type="xsd:double" />
+				<xsd:attribute default="0" name="offset" type="xsd:double" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Unit">
+		<xsd:sequence>
+			<xsd:element name="baseUnit" type="icd:BaseUnit" />
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="displayUnits"
+				type="icd:DisplayUnit" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Units">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="units" type="icd:Unit" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- Endpoint -->
+	<xsd:complexType name="Endpoint">
+		<xsd:complexContent>
+			<xsd:extension base="icd:BaseElement">
+				<xsd:attribute name="address" type="xsd:string"
+					use="required">
+					<xsd:annotation>
+						<xsd:documentation>IP address of the network port.
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="port" type="xsd:int">
+					<xsd:annotation>
+						<xsd:documentation>IP port of the network port.
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="type" type="icd:EndpointType"
+					default="OTHER">
+					<xsd:annotation>
+						<xsd:documentation>The type of the endpoint. Can be used to
+							declare client/server relations.
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="role" type="icd:EndpointRole"
+					default="N/A" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	
+	<!-- Simple Types -->
+	<xsd:simpleType name="EndpointType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="TCP" />
+			<xsd:enumeration value="UDP" />
+			<xsd:enumeration value="OTHER" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="EndpointRole">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="N/A" />
+			<xsd:enumeration value="SERVER" />
+			<xsd:enumeration value="CLIENT" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType ecore:instanceClass="double[]" name="FloatingPointArray">
+		<xsd:restriction base="xsd:string" />
+	</xsd:simpleType>
+	<xsd:simpleType ecore:instanceClass="int[]" name="IntegerArray">
+		<xsd:restriction base="xsd:string" />
+	</xsd:simpleType>
+	<xsd:simpleType ecore:instanceClass="String[]" name="StringArray">
+		<xsd:restriction base="xsd:string" />
+	</xsd:simpleType>
+	<xsd:simpleType ecore:instanceClass="String[]" name="IdArray">
+		<xsd:list itemType="icd:IdString" />
+	</xsd:simpleType>
+	<xsd:simpleType ecore:instanceClass="boolean[]" name="BooleanArray">
+		<xsd:restriction base="xsd:string" />
+	</xsd:simpleType>
+
+	<!-- ICD Types -->
+	<xsd:complexType name="Channel">
+		<xsd:complexContent>
+			<xsd:extension base="icd:BaseElement">
+				<xsd:sequence>
+					<xsd:element name="Security" minOccurs="0" type="icd:Security" />
+					<xsd:element maxOccurs="unbounded" minOccurs="0" ref="icd:ElementType" />
+					<xsd:element name="SubProtocol" maxOccurs="unbounded" minOccurs="0" type="icd:SubProtocol" />
+				</xsd:sequence>
+				<xsd:attribute name="protocol" type="icd:ReferenceId" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="SubProtocol">
+		<xsd:attribute name="protocol" type="icd:ReferenceId" />
+	</xsd:complexType>
+
+	<xsd:complexType name="ChannelLinks">
+		<xsd:choice maxOccurs="unbounded">
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Link" type="icd:Link" />
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="PortLink" type="icd:PortLink" />
+		</xsd:choice>
+		<xsd:attribute name="channel" type="icd:ReferenceId" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="Channels">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="icd:Channel" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="DataDefinition">
+		<xsd:complexContent>
+			<xsd:extension base="icd:Document">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" maxOccurs="unbounded" ref="icd:ElementType" />
+				</xsd:sequence>
+				<xsd:attribute name="name" type="icd:IdString" use="optional" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ModelLink">
+		<xsd:complexContent>
+			<xsd:extension base="icd:Document">
+				<xsd:sequence>
+					<xsd:choice maxOccurs="unbounded">
+						<xsd:element minOccurs="0" name="Imports" type="icd:NetworkImports" />
+						<xsd:element minOccurs="0" name="Sends" type="icd:ChannelLinks" />
+						<xsd:element minOccurs="0" name="Receives" type="icd:ChannelLinks" />
+					</xsd:choice>
+				</xsd:sequence>
+				<xsd:attribute name="name" type="icd:IdString" use="required" />
+				<xsd:attribute ecore:reference="icd:ModelInterface" name="modelInterface"
+					type="xsd:anyURI" />
+				<xsd:attribute ecore:reference="icd:GlobalSimulationDataDescription"
+					name="globalSimulationDataDescription" type="xsd:anyURI" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ModelSpecification">
+		<xsd:complexContent>
+			<xsd:extension base="icd:Document">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="Security" type="icd:Security" />
+					<xsd:choice maxOccurs="unbounded">
+						<xsd:element minOccurs="0" name="Imports" type="icd:Imports" />
+						<xsd:element minOccurs="0" name="Data" type="icd:DataDefinition" />
+						<xsd:element minOccurs="0" name="Sends" type="icd:ChannelLinks" />
+						<xsd:element minOccurs="0" name="Receives" type="icd:ChannelLinks" />
+						<xsd:element minOccurs="0" name="Parameters" type="icd:DataGroup" />
+					</xsd:choice>
+				</xsd:sequence>
+				<xsd:attribute name="name" type="icd:IdString" use="required" />
+				<xsd:attribute ecore:reference="icd:GlobalSimulationDataDescription"
+					name="globalSimulationDataDescription" type="xsd:anyURI" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ModelInterface">
+		<xsd:complexContent>
+			<xsd:extension base="icd:Document">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="Security" type="icd:Security" />
+					<xsd:choice maxOccurs="unbounded">
+						<xsd:element minOccurs="0" name="Imports" type="icd:Imports" />
+						<xsd:element minOccurs="0" name="Data" type="icd:DataDefinition" />
+						<xsd:element minOccurs="0" name="Inputs" type="icd:DataGroup" />
+						<xsd:element minOccurs="0" name="Outputs" type="icd:DataGroup" />
+						<xsd:element minOccurs="0" name="InputPorts" type="icd:Ports" />
+						<xsd:element minOccurs="0" name="OutputPorts" type="icd:Ports" />
+						<xsd:element minOccurs="0" name="Parameters" type="icd:DataGroup" />
+					</xsd:choice>
+				</xsd:sequence>
+				<xsd:attribute name="name" type="icd:IdString" use="required" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="GlobalSimulationDataDescription">
+		<xsd:complexContent>
+			<xsd:extension base="icd:Document">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="Security" type="icd:Security" />
+					<xsd:choice maxOccurs="unbounded">
+						<xsd:element minOccurs="0" name="Imports" type="icd:Imports" />
+						<xsd:element minOccurs="0" name="Data" type="icd:DataDefinition" />
+						<xsd:element minOccurs="0" name="Channels" type="icd:Channels" />
+					</xsd:choice>
+				</xsd:sequence>
+				<xsd:attribute name="name" type="icd:IdString" use="optional" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Imports">
+		<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+			<xsd:element minOccurs="0" name="Protocol" ecore:name="ProtocolImport"
+				type="icd:ProtocolImport" />
+			<xsd:element minOccurs="0" name="DataDefinition" ecore:name="DataDefinitionImport"
+				type="icd:DataDefinitionImport" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="NetworkImports">
+		<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+			<xsd:element minOccurs="0" name="Network" ecore:name="NetworkImport"
+				type="icd:NetworkImport" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ProtocolImport">
+		<xsd:attribute name="href" ecore:name="protocol" ecore:reference="icd:Protocol"
+			type="xsd:anyURI" />
+	</xsd:complexType>
+	<xsd:complexType name="DataDefinitionImport">
+		<xsd:attribute name="href" ecore:name="dataDefinition"
+			ecore:reference="icd:DataDefinition" type="xsd:anyURI" />
+	</xsd:complexType>
+	<xsd:complexType name="NetworkImport">
+		<xsd:attribute name="href" ecore:name="network" ecore:reference="icd:Network"
+			type="xsd:anyURI" />
+	</xsd:complexType>
+
+	<xsd:complexType name="Protocol">
+		<xsd:complexContent>
+			<xsd:extension base="icd:Document">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="Security" type="icd:Security" />
+					<xsd:element minOccurs="0" maxOccurs="unbounded" name="Imports" type="icd:Imports" />
+					<xsd:element minOccurs="0" maxOccurs="unbounded" name="Data" type="icd:DataDefinition" />
+				</xsd:sequence>
+				<xsd:attribute name="name" type="icd:IdString" use="required" />
+				<xsd:attribute name="showRawContent" type="xsd:boolean" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="MessagePeriodicTransmission">
+		<xsd:attribute name="period" type="xsd:double" use="required" />
+	</xsd:complexType>
+	
+	<xsd:complexType name="MessageAperiodicTransmission">
+		<xsd:attribute name="maxPeakRate" type="xsd:double" default="0" />
+		<xsd:attribute name="averagePeriod" type="xsd:double"  default="0" />
+	</xsd:complexType>
+	
+	<xsd:complexType name="ProtocolMessage">
+		<xsd:complexContent>
+			<xsd:extension base="icd:BaseElement">
+				<xsd:sequence>
+					<xsd:choice maxOccurs="1" minOccurs="0">
+						<xsd:element maxOccurs="1" minOccurs="0" name="AperiodicTransmission" type="icd:MessageAperiodicTransmission"/>
+						<xsd:element maxOccurs="1" minOccurs="0" name="PeriodicTransmission" type="icd:MessagePeriodicTransmission"/>
+					</xsd:choice>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="GenericProtocol">
+		<xsd:complexContent>
+			<xsd:extension base="icd:Protocol">
+				<xsd:sequence>
+					<xsd:element maxOccurs="1" minOccurs="0" name="StreamConfiguration" type="icd:StreamConfiguration"/>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="Ordering"
+						type="icd:Ordering" />
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="Message"
+						type="icd:GenericMessage" />
+				</xsd:sequence>
+				<xsd:attribute name="type" type="xsd:string" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="GenericMessage">
+		<xsd:complexContent>
+			<xsd:extension base="icd:BaseElement">
+				<xsd:sequence>
+					<xsd:choice maxOccurs="1" minOccurs="0">
+						<xsd:element maxOccurs="1" minOccurs="0" name="AperiodicTransmission" type="icd:MessageAperiodicTransmission"/>
+						<xsd:element maxOccurs="1" minOccurs="0" name="PeriodicTransmission" type="icd:MessagePeriodicTransmission"/>
+					</xsd:choice>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" ref="icd:ElementType" />
+				</xsd:sequence>
+				<xsd:attribute name="label" type="xsd:string" use="optional" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="Network">
+		<xsd:complexContent>
+			<xsd:extension base="icd:Document">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="Security" type="icd:Security" />
+				</xsd:sequence>
+				<xsd:attribute name="name" type="icd:IdString" use="required" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="Link">
+		<xsd:attribute name="signal" type="icd:ReferenceId" use="required" />
+		<xsd:attribute name="variable" type="icd:ReferenceId" use="optional" />
+		<xsd:attribute name="endpoint" type="icd:ReferenceId" use="optional" />
+		<xsd:attribute name="network" type="icd:ReferenceId" use="optional" />
+	</xsd:complexType>
+
+	<xsd:complexType name="PortLink">
+		<xsd:sequence maxOccurs="unbounded" minOccurs="0">
+			<xsd:element name="Link" type="icd:Link" />
+		</xsd:sequence>
+		<xsd:attribute name="port" type="icd:ReferenceId" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="MessageElement">
+		<xsd:complexContent>
+			<xsd:extension base="icd:StructureType" />
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="DataGroup">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="icd:ElementType" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Ports">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" ref="icd:Port" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Port" abstract="true">
+		<xsd:complexContent>
+			<xsd:extension base="icd:LabeledElement">
+				<xsd:sequence>
+					<xsd:element name="Security" minOccurs="0" type="icd:Security" />
+					<xsd:element name="Messages" maxOccurs="1" minOccurs="0">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="Message" maxOccurs="unbounded" minOccurs="0"
+									type="icd:MessageReference" />
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" ref="icd:ElementType" />
+				</xsd:sequence>
+				<xsd:attribute name="size" type="xsd:nonNegativeInteger" />
+				<xsd:attribute name="protocol" type="icd:ReferenceId" />
+				<xsd:attribute name="messages" type="icd:IdArray" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="MessageReference">
+		<xsd:attribute name="name" use="required" type="icd:IdString" />
+	</xsd:complexType>
+
+	<xsd:complexType name="QueuingPort">
+		<xsd:complexContent>
+			<xsd:extension base="icd:Port">
+				<xsd:attribute name="depth" type="xsd:nonNegativeInteger" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="SamplingPort">
+		<xsd:complexContent>
+			<xsd:extension base="icd:Port" />
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="Document">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="Properties" type="icd:Properties" />
+		</xsd:sequence>
+		<xsd:attribute name="description" type="xsd:string" />
+		<xsd:attribute name="version" type="icd:Version" />
+		<!-- schemaVersion will be required from 2.0.0 onwards -->
+		<xsd:attribute name="schemaVersion" type="icd:Version" />
+	</xsd:complexType>
+
+	<!-- ICD Simple types -->
+	<xsd:simpleType name="ReferenceId">
+		<xsd:restriction base="icd:IdString" />
+	</xsd:simpleType>
+
+	<xsd:simpleType name="ConditionType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="INCLUDE" />
+			<xsd:enumeration value="EXCLUDE" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="DynamicArrayType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="CARDINAL">
+				<xsd:annotation>
+					<xsd:documentation>
+						The size of the array is specified by the number of array entries.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="BITLENGTH">
+				<xsd:annotation>
+					<xsd:documentation>
+						The size of the array is specified by the length of each array entries in bits.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="CONDITION">
+				<xsd:annotation>
+					<xsd:documentation>
+						The size of the array is specified by a condition which has to be met with the last entry of the array. 
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="END_OF_DATA">
+				<xsd:annotation>
+					<xsd:documentation>
+						The array continues until the end of the buffer used for transmission. 
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="WordLengthType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="W1" />
+			<xsd:enumeration value="W8" />
+			<xsd:enumeration value="W16" />
+			<xsd:enumeration value="W32" />
+			<xsd:enumeration value="W64" />
+			<xsd:enumeration value="W128" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="EnumPrecisionType">
+		<xsd:annotation>
+			<xsd:documentation>
+				Enumerated element precision data types.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="INT8" />
+			<xsd:enumeration value="INT16" />
+			<xsd:enumeration value="INT32" />
+			<xsd:enumeration value="UINT8" />
+			<xsd:enumeration value="UINT16" />
+			<xsd:enumeration value="UINT32" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="IntegerPrecisionType">
+		<xsd:annotation>
+			<xsd:documentation>
+				Integer precision data types.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="INT8" />
+			<xsd:enumeration value="INT16" />
+			<xsd:enumeration value="INT32" />
+			<xsd:enumeration value="INT64" />
+			<xsd:enumeration value="UINT8" />
+			<xsd:enumeration value="UINT16" />
+			<xsd:enumeration value="UINT32" />
+			<xsd:enumeration value="UINT64" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="FloatingPointPrecisionType">
+		<xsd:annotation>
+			<xsd:documentation>
+				Floating point precision data types.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="FLOAT32" />
+			<xsd:enumeration value="FLOAT64" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="MetainformationTag">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="MESSAGE_ID" />
+			<xsd:enumeration value="MESSAGE_BIT_SIZE" />
+			<xsd:enumeration value="MESSAGE_BYTE_SIZE" />
+			<xsd:enumeration value="MESSAGE_WORD_SIZE" />
+			<xsd:enumeration value="MESSAGE_COUNTER" />
+			<xsd:enumeration value="MESSAGE_CHECKSUM" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="RangeBoundaries">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="MINIMUM_MAXIMUM_INCLUSIVE" />
+			<xsd:enumeration value="MINIMUM_EXCLUSIVE" />
+			<xsd:enumeration value="MAXIMUM_EXCLUSIVE" />
+			<xsd:enumeration value="MINIMUM_MAXIMUM_EXCLUSIVE" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="CheckSumType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="CRC32" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:complexType name="StreamConfiguration">
+		<xsd:attribute name="type"
+			type="icd:StreamConfigurationType" />
+	</xsd:complexType>
+
+	<xsd:simpleType name="StreamConfigurationType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="METAINFORMATION_MESSAGE_SIZE">
+				<xsd:annotation>
+					<xsd:documentation>This configuration type declares that the message must contain a signal which is flagged with the metainformation tag MESSAGE_SIZE.
+					This information can be used to compute the size of the message and using this information build the stream buffers.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="COBS">
+				<xsd:annotation>
+					<xsd:documentation>This configuration type declares that the message stream is encoded using Consistent Overhead Byte Stuffing.</xsd:documentation></xsd:annotation>
+				</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="BitLayoutType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="FIXED">
+				<xsd:annotation>
+					<xsd:documentation>The starting bit position is fixed and is not changed at transmission time.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="DYNAMIC">
+				<xsd:annotation>
+					<xsd:documentation>The starting bit position is calculated dynamically at transmission time. In this case, the 'startBit' attribute can be omitted or can be used as pre-padding.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+</xsd:schema>

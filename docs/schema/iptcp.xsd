@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:iptcp="http://www.airbus.com/si2/iptcp"
+	xmlns:icd="http://www.airbus.com/si2/icd"
+	xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.airbus.com/si2/iptcp"
+	elementFormDefault="qualified" attributeFormDefault="unqualified"
+	ecore:ignoreSubstitutionGroups="true" version="0.2.0">
+
+	<xsd:import
+		namespace="http://www.eclipse.org/emf/2002/Ecore"
+		schemaLocation="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.xsd" />
+	<xsd:import namespace="http://www.airbus.com/si2/icd"
+		schemaLocation="platform:/resource/com.airbus.si2.icd/model/icd.xsd" />
+
+	<xsd:element name="IpTcpProtocol"
+		type="iptcp:IpTcpProtocol" />
+	<xsd:element name="IpTcpNetwork" type="iptcp:IpTcpNetwork" />
+	<xsd:element ecore:ignore="true" name="IpTcpMessage"
+		type="iptcp:IpTcpMessage" />
+	<xsd:element ecore:ignore="true" name="IpTcpMessageSignal"
+		type="iptcp:IpTcpMessageSignal" />
+
+	<xsd:complexType name="IpTcpProtocol">
+		<xsd:complexContent>
+			<xsd:extension base="icd:Protocol">
+				<xsd:sequence>
+					<xsd:element maxOccurs="1" minOccurs="0"
+						name="StreamConfiguration" type="icd:StreamConfiguration" />
+					<xsd:element maxOccurs="unbounded" minOccurs="0"
+						name="Message" type="iptcp:IpTcpMessage" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="IpTcpMessage">
+		<xsd:complexContent>
+			<xsd:extension base="icd:ProtocolMessage">
+				<xsd:sequence>
+					<xsd:element maxOccurs="1" minOccurs="0" name="Signals"
+						type="iptcp:IpTcpMessageSignal" />
+				</xsd:sequence>
+				<xsd:attribute name="size"
+					type="xsd:nonNegativeInteger"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="IpTcpMessageSignal">
+		<xsd:complexContent>
+			<xsd:extension base="icd:DataGroup" />
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="IpTcpNetwork">
+		<xsd:complexContent>
+			<xsd:extension base="icd:Network">
+				<xsd:sequence maxOccurs="1" minOccurs="1">
+					<xsd:element name="Endpoint" type="icd:Endpoint" maxOccurs="unbounded"/>
+					<!--
+					Routes were removed from the final network document.
+					But routes still exist in EMF model as transient.
+					Because routes are used during the ICD generation.
+					
+					<xsd:element name="Route" type="iptcp:IpTcpRoute" maxOccurs="unbounded"/>
+					-->
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="IpTcpRoute">
+		<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+			<xsd:element name="Message" type="icd:IdString" />
+		</xsd:sequence>
+		<xsd:attribute name="from" type="icd:IdString" />
+		<xsd:attribute name="to" type="icd:IdString" />
+	</xsd:complexType>
+</xsd:schema>

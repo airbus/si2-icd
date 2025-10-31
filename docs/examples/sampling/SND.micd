@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ModelInterface name="SND" xmlns="http://www.airbus.com/si2/icd">
+    <Imports>
+        <DataDefinition href="data.dd#//@dataDefinition"/>
+    </Imports>
+    <Outputs>
+        <StringElement dimensions="12" name="out_str"/>
+        <IntegerElement name="out_i8" type="INT8"/>
+        <IntegerElement name="out_ui8" type="UINT8"/>
+        <IntegerElement name="out_i16" type="INT16"/>
+        <IntegerElement name="out_ui16" type="UINT16"/>
+        <IntegerElement name="out_i32" type="INT32"/>
+        <IntegerElement name="out_ui32" type="UINT32"/>
+        <IntegerElement name="out_i64" type="INT64"/>
+        <IntegerElement name="out_ui64" type="UINT64"/>
+        <BooleanElement name="out_b"/>
+        <IntegerArrayElement dimensions="3" name="out_ui64_array" type="UINT64"/>
+        <ReferenceElement name="out_enum" reference="test_enum"/>
+        <FloatingPointElement name="out_f32" type="FLOAT32"/>
+        <FloatingPointElement name="out_f64" type="FLOAT64"/>
+        <ReferenceElement name="out_struct" reference="test_struct"/>
+        <ReferenceArrayElement dimensions="3" name="out_struct_array" reference="test_struct"/>
+    </Outputs>
+</ModelInterface>

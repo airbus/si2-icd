@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ModelLink name="RCV" xmlns="http://www.airbus.com/si2/icd" modelInterface="RCV.micd#//@modelInterface" globalSimulationDataDescription="Data.gsdd#data">
+    <Receives channel="UdpChannel">
+        <PortLink port="message1_Port">
+            <Link signal="message1"/>
+        </PortLink>
+        <PortLink port="message2_Port">
+            <Link signal="message2"/>
+        </PortLink>
+    </Receives>
+</ModelLink>

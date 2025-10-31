@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalSimulationDataDescription xmlns="http://www.airbus.com/si2/icd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="data">
+    <Imports>
+        <DataDefinition href="data.dd#//@dataDefinition"/>
+    </Imports>
+    <Channels>
+        <Channel name="SND_out">
+            <StringElement dimensions="12" name="str"/>
+            <IntegerElement name="i8" type="INT8"/>
+            <IntegerElement name="ui8" type="UINT8"/>
+            <IntegerElement name="i16" type="INT16"/>
+            <IntegerElement name="ui16" type="UINT16"/>
+            <IntegerElement name="i32" type="INT32"/>
+            <IntegerElement name="ui32" type="UINT32"/>
+            <IntegerElement name="i64" type="INT64"/>
+            <IntegerElement name="ui64" type="UINT64"/>
+            <BooleanElement name="b"/>
+            <IntegerArrayElement dimensions="3" name="ui64_array" type="UINT64"/>
+            <ReferenceElement name="enum_" reference="test_enum"/>
+            <FloatingPointElement name="f32" type="FLOAT32"/>
+            <FloatingPointElement name="f64" type="FLOAT64"/>
+            <ReferenceElement name="struct_" reference="test_struct"/>
+            <ReferenceArrayElement dimensions="3" name="struct_array_" reference="test_struct"/>
+        </Channel>
+    </Channels>
+</GlobalSimulationDataDescription>

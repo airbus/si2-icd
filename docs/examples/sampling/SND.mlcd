@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ModelLink name="SND" xmlns="http://www.airbus.com/si2/icd" modelInterface="SND.micd#//@modelInterface" globalSimulationDataDescription="Data.gsdd#data">
+    <Sends channel="SND_out">
+        <Link signal="str" variable="out_str"/>
+        <Link signal="i8" variable="out_i8"/>
+        <Link signal="ui8" variable="out_ui8"/>
+        <Link signal="i16" variable="out_i16"/>
+        <Link signal="ui16" variable="out_ui16"/>
+        <Link signal="i32" variable="out_i32"/>
+        <Link signal="ui32" variable="out_ui32"/>
+        <Link signal="i64" variable="out_i64"/>
+        <Link signal="ui64" variable="out_ui64"/>
+        <Link signal="b" variable="out_b"/>
+        <Link signal="ui64_array" variable="out_ui64_array"/>
+        <Link signal="enum_" variable="out_enum"/>
+        <Link signal="f32" variable="out_f32"/>
+        <Link signal="f64" variable="out_f64"/>
+        <Link signal="struct_" variable="out_struct"/>
+        <Link signal="struct_array_" variable="out_struct_array"/>
+    </Sends>
+</ModelLink>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ModelLink name="SND" xmlns="http://www.airbus.com/si2/icd" modelInterface="SND.micd#//@modelInterface" globalSimulationDataDescription="Data.gsdd#data">
+
+    <Sends channel="AnalogChannel">
+    
+        <!-- Send an engineering symbol to an analog signal -->
+        <Link signal="line1.value" variable="out_line1"/>
+        
+        <!-- Send an analog signal using a port -->
+        <PortLink port="out_line2_port"/>
+    </Sends>
+    
+    <Sends channel="SignalChannel">
+    
+        <!-- Write an analog signal from a port to an engineering signal -->
+        <PortLink port="out_line3_port">
+            <Link signal="line3_value" variable="line3.value"/>
+        </PortLink>
+    </Sends>
+    
+</ModelLink>

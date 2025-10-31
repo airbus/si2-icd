@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IpUdpProtocol xmlns="http://www.airbus.com/si2/ipudp" xmlns:icd="http://www.airbus.com/si2/icd" name="UpdProtocol">
+
+    <Message name="message1" size="4">
+        <Signals>
+            <icd:IntegerElement name="signal1" type="UINT32">
+                <icd:BitLayout startBit="0" bitLength="32"/>
+            </icd:IntegerElement>
+        </Signals>
+    </Message>
+    <Message name="message2" size="4">
+        <Signals>
+            <icd:IntegerElement name="signal2" type="UINT32">
+                <icd:BitLayout startBit="0" bitLength="32"/>
+            </icd:IntegerElement>
+        </Signals>
+    </Message>
+
+</IpUdpProtocol>

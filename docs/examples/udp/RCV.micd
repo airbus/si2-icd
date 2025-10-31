@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ModelInterface name="RCV" xmlns="http://www.airbus.com/si2/icd">
+    <Imports>
+        <Protocol href="Protocol.ipudp#//@IpUdpProtocol"/>
+    </Imports>
+    <InputPorts>
+        <QueuingPort depth="100" name="message1_Port" size="32" protocol="UpdProtocol">
+            <Messages>
+                <Message name="message1"/>
+            </Messages>
+        </QueuingPort>
+        <QueuingPort depth="100" name="message2_Port" size="32" protocol="UpdProtocol">
+            <Messages>
+                <Message name="message2"/>
+            </Messages>
+        </QueuingPort>
+    </InputPorts>
+</ModelInterface>

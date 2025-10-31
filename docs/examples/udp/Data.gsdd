@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalSimulationDataDescription xmlns="http://www.airbus.com/si2/icd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="data">
+    <Imports>
+        <Protocol href="Protocol.ipudp#//@IpUdpProtocol"/>
+    </Imports>
+    <Channels>
+        <Channel name="UdpChannel" protocol="UpdProtocol"/>
+    </Channels>
+</GlobalSimulationDataDescription>

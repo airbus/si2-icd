@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:arinc429="http://www.airbus.com/si2/arinc429"
+	xmlns:icd="http://www.airbus.com/si2/icd" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.airbus.com/si2/arinc429"
+	elementFormDefault="qualified" attributeFormDefault="unqualified"
+	ecore:ignoreSubstitutionGroups="true"
+	version="0.9.0">
+
+	<xsd:import namespace="http://www.eclipse.org/emf/2002/Ecore"
+		schemaLocation="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.xsd" />
+	<xsd:import namespace="http://www.airbus.com/si2/icd"
+		schemaLocation="platform:/plugin/com.airbus.si2.icd/model/icd.xsd" />
+
+	<xsd:element name="Arinc429Protocol" type="arinc429:Arinc429Protocol" />
+	<xsd:element ecore:ignore="true" name="Arinc429Message" type="arinc429:Arinc429Message" />
+
+	<xsd:complexType name="Arinc429Protocol">
+		<xsd:complexContent>
+			<xsd:extension base="icd:Protocol">
+				<xsd:sequence>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="Message"
+						type="arinc429:Arinc429Message" />
+				</xsd:sequence>
+				<xsd:attribute name="parity" use="optional" default="ODD">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">
+							The Parity definition. Can be even or odd.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="ODD" />
+							<xsd:enumeration value="EVEN" />
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="Arinc429Message">
+		<xsd:complexContent>
+			<xsd:extension base="icd:ProtocolMessage">
+				<xsd:sequence>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" ref="icd:ElementType" />
+				</xsd:sequence>
+				
+				<xsd:attribute name="label" type="ecore:EString" use="required" />
+				<xsd:attribute name="sdi" use="optional">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">
+							The Source/Destination Identifier.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="N/A" />
+							<xsd:enumeration value="00" />
+							<xsd:enumeration value="01" />
+							<xsd:enumeration value="10" />
+							<xsd:enumeration value="11" />
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:attribute>
+				<xsd:attribute name="ssm" use="optional">
+					<xsd:annotation>
+						<xsd:documentation xml:lang="en">
+							The encoding of the Sign/Status Matrix. Default
+							value is BCD SSM encoding.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:string">
+							<xsd:enumeration value="N/A">
+								<xsd:annotation>
+									<xsd:documentation>Not available</xsd:documentation>
+								</xsd:annotation>
+							</xsd:enumeration>
+							<xsd:enumeration value="BCD">
+								<xsd:annotation>
+									<xsd:documentation>00: Plus, North, East, Right, To, Above</xsd:documentation>
+									<xsd:documentation>01: No Computed Data (NCD)</xsd:documentation>
+									<xsd:documentation>10: Functional Test (FT)</xsd:documentation>
+									<xsd:documentation>11: Minus, South, West, Left, From, Below</xsd:documentation>
+								</xsd:annotation>
+							</xsd:enumeration>
+							<xsd:enumeration value="BNR">
+								<xsd:annotation>
+									<xsd:documentation>00: Failure Warning (FW)</xsd:documentation>
+									<xsd:documentation>01: No Computed Data (NCD)</xsd:documentation>
+									<xsd:documentation>10: Functional Test (FT)</xsd:documentation>
+									<xsd:documentation>11: Normal Operation (NO)</xsd:documentation>
+								</xsd:annotation>
+							</xsd:enumeration>
+							<xsd:enumeration value="DISCRETE">
+								<xsd:annotation>
+									<xsd:documentation>00: Verified Data, Normal Operation</xsd:documentation>
+									<xsd:documentation>01: No Computed Data (NCD)</xsd:documentation>
+									<xsd:documentation>10: Functional Test (FT)</xsd:documentation>
+									<xsd:documentation>11: Failure Warning (FW)</xsd:documentation>
+								</xsd:annotation>
+							</xsd:enumeration>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ModelLink name="RCV" xmlns="http://www.airbus.com/si2/icd" modelInterface="RCV.micd#//@modelInterface" globalSimulationDataDescription="Data.gsdd#data">
+
+    <Receives channel="AnalogChannel">
+    
+        <!-- Receive an analog signal using a port -->
+        <PortLink port="in_line1_port"/>
+        
+        <!-- Receive an analog signal using an engineering symbol -->
+        <Link signal="line2.value" variable="in_line2"/>
+    </Receives>
+    
+    <Receives channel="SignalChannel">
+    
+        <!-- Receive an engineering signal using an analog port -->
+        <PortLink port="in_line3_port">
+            <Link signal="line3_value" variable="line3.value"/>
+        </PortLink>
+    </Receives>
+
+</ModelLink>

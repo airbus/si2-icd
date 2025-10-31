@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalSimulationDataDescription xmlns="http://www.airbus.com/si2/icd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="data">
+    <Imports>
+        <Protocol href="Protocol.analog#//@analogProtocol"/>
+    </Imports>
+    <Channels>
+        <Channel name="AnalogChannel" protocol="Analog_prot"/>
+        <Channel name="SignalChannel">
+            <FloatingPointElement name="line3_value" type="FLOAT32"/>
+        </Channel>
+    </Channels>
+</GlobalSimulationDataDescription>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ModelInterface name="RCV" xmlns="http://www.airbus.com/si2/icd">
+    <Imports>
+        <Protocol href="line1.analog#//@analogProtocol"/>
+        <Protocol href="line3.analog#//@analogProtocol"/>
+    </Imports>
+    <Inputs>
+        <FloatingPointElement name="in_line2" type="FLOAT32"/>
+    </Inputs>
+    <InputPorts>
+        <QueuingPort depth="4" name="in_line1_port" size="4" protocol="Line1_prot"/>
+        <QueuingPort depth="4" name="in_line3_port" size="4" protocol="Line3_prot"/>
+    </InputPorts>
+</ModelInterface>

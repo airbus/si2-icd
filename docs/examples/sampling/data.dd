@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataDefinition xmlns="http://www.airbus.com/si2/icd">
+    <EnumeratedElement name="test_enum">
+        <Entry name="value_a" value="1"/>
+        <Entry name="value_b" value="2"/>
+        <Entry name="value_c" value="4"/>
+    </EnumeratedElement>
+    <StructureElement name="test_sub_struct">
+        <IntegerElement name="i08" type="INT8"/>
+        <IntegerElement name="i16" type="INT16"/>
+        <IntegerElement name="i32" type="INT32"/>
+    </StructureElement>
+    <StructureElement name="test_struct">
+        <IntegerElement name="i08" type="INT8"/>
+        <IntegerElement name="i16" type="INT16"/>
+        <IntegerElement name="i32" type="INT32"/>
+        <ReferenceElement name="enum_" reference="test_enum"/>
+        <ReferenceElement name="substruct" reference="test_sub_struct"/>
+        <BooleanElement name="b"/>
+        <FloatingPointElement name="f64" type="FLOAT64"/>
+        <ReferenceArrayElement dimensions="3" name="substruct_array" reference="test_sub_struct"/>
+    </StructureElement>
+</DataDefinition>

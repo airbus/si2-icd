@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ModelLink name="RCV" xmlns="http://www.airbus.com/si2/icd" modelInterface="RCV.micd#//@modelInterface" globalSimulationDataDescription="Data.gsdd#data">
+    <Receives channel="SND_out">
+        <Link signal="str" variable="in_str"/>
+        <Link signal="i8" variable="in_i8"/>
+        <Link signal="ui8" variable="in_ui8"/>
+        <Link signal="i16" variable="in_i16"/>
+        <Link signal="ui16" variable="in_ui16"/>
+        <Link signal="i32" variable="in_i32"/>
+        <Link signal="ui32" variable="in_ui32"/>
+        <Link signal="i64" variable="in_i64"/>
+        <Link signal="ui64" variable="in_ui64"/>
+        <Link signal="b" variable="in_b"/>
+        <Link signal="ui64_array" variable="in_ui64_array"/>
+        <Link signal="enum_" variable="in_enum"/>
+        <Link signal="f32" variable="in_f32"/>
+        <Link signal="f64" variable="in_f64"/>
+        <Link signal="struct_" variable="in_struct"/>
+        <Link signal="struct_array_" variable="in_struct_array"/>
+    </Receives>
+</ModelLink>
