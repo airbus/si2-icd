@@ -7,7 +7,7 @@ This repository defines and documents the **Si² ICD (Interface Control Document
 The repository is organized as follows:
 
 ```
-EXAP/
+si2-icd/
 ├── docs/                       # Documentation
 │   ├── examples/               # Examples of Si² ICD files
 │   ├── images/                 # Images used in documentation
